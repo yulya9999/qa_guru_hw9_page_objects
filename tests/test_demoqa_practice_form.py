@@ -14,7 +14,7 @@ def test_user_can_send_form():
             .fill_date_of_birth('11', '028', '2000')
             .fill_subject('Economics')
             .fill_gender('2')
-            .fill_hobbies('1')
+            .fill_hobbies()
             .upload_file('kit.jpg')
             .fill_state('Haryana')
             .fill_city('Karnal')
@@ -34,5 +34,3 @@ def test_user_can_send_form():
             )
         )
     )
-
-

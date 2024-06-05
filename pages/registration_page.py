@@ -1,45 +1,40 @@
-from selene import browser, be, have, command
+from selene import browser, have, command
 import os
+from pathlib import Path
+
+import tests
 
 
 class RegistrationPage:
     def __init__(self):
-
         self.state = browser.element('#state')
         self.city = browser.element('#city')
 
     def open_browser(self):
-
         browser.open("/automation-practice-form")
         return self
 
     def fill_first_name(self, value):
-
         browser.element("#firstName").type(value)
         return self
 
     def fill_last_name(self, value):
-
         browser.element("#lastName").type(value)
         return self
 
     def fill_email(self, value):
-
         browser.element("#userEmail").type(value)
         return self
 
     def fill_number(self, value):
-
         browser.element("#userNumber").type(value)
         return self
 
     def fill_address(self, value):
-
         browser.element("#currentAddress").type(value)
         return self
 
     def fill_date_of_birth(self, month, day, year):
-
         browser.element("#dateOfBirthInput").click()
         browser.element(f'.react-datepicker__month-select option[value="{month}"]').click()
         browser.element(f'.react-datepicker__year-select option[value="{year}"]').click()
@@ -47,31 +42,23 @@ class RegistrationPage:
         return self
 
     def fill_subject(self, value):
-
         browser.element("#subjectsInput").type(f"{value}")
         browser.element(".subjects-auto-complete__menu").click()
-        browser.element(
-            ".subjects-auto-complete__indicators .subjects-auto-complete__clear-indicator"
-        ).click()
-        browser.element("#subjectsInput").should(be.blank)
         browser.element("#subjectsInput").type(f"{value}").press_tab()
 
         return self
 
     def fill_gender(self, value):
-
         browser.element(f'[for="gender-radio-{value}"]').click()
         return self
 
-    def fill_hobbies(self, value):
-
+    def fill_hobbies(self):
         browser.element('[for="hobbies-checkbox-1"]').click()
         return self
 
     def upload_file(self, file_name):
-
-        browser.element(".form-file").click().element("#uploadPicture").send_keys(
-            os.path.abspath(f"data/{file_name}")
+        browser.element('#uploadPicture').type(
+            str(Path(tests.__file__).parent.joinpath(f'data/{file_name}'))
         )
         return self
 
