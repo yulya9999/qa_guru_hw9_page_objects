@@ -34,9 +34,9 @@ class RegistrationPage:
 
     def _fill_date_of_birth(self, month, day, year):
         browser.element("#dateOfBirthInput").click()
-        browser.element(f'.react-datepicker__month-select option[value="{month}"]').click()
+        browser.element('.react-datepicker__month-select').type(month)
         browser.element(f'.react-datepicker__year-select option[value="{year}"]').click()
-        browser.all(f'.react-datepicker__day--{day}').second.click()
+        browser.all(f'.react-datepicker__day--0{day}').second.click()
         return self
 
     def _fill_subject(self, value):
@@ -51,11 +51,11 @@ class RegistrationPage:
         return self
 
     def _fill_gender(self, value):
-        browser.element(f'[for="gender-radio-{value}"]').click()
+        browser.all('.custom-control-label').element_by(have.exact_text(value)).click()
         return self
 
     def _fill_hobbies(self, value):
-        browser.element('[for="hobbies-checkbox-1"]').click()
+        browser.all('.custom-control-label').element_by(have.exact_text(value)).click()
         return self
 
     def _upload_file(self, file_name):
@@ -91,10 +91,10 @@ class RegistrationPage:
             ._fill_email(student.email)
             ._fill_gender(student.gender)
             ._fill_number(student.phone)
-            ._fill_date_of_birth(student.date_year, student.date_month, student.date_day)
+            ._fill_date_of_birth(student.date_month, student.date_day, student.date_year)
             ._fill_subject(student.subject)
             ._fill_hobbies(student.hobby)
-            ._upload_file(student.photo)
+            ._upload_file(student.file)
             ._fill_address(student.address)
             ._fill_state(student.state)
             ._fill_city(student.city)
@@ -112,25 +112,8 @@ class RegistrationPage:
                 f'{student.date_day} {student.date_month},{student.date_year}',
                 student.subject,
                 student.hobby,
-                student.photo,
+                student.file,
                 student.address,
                 f'{student.state} {student.city}'
-            )
-        )
-
-    def registered_user_with(self, full_name, email, gender, phone, date, subject, hobbies, file, address,
-                             state):
-        browser.element(".modal-content").element("table").all("tr").all("td").even.should(
-            have.exact_texts(
-                full_name,
-                email,
-                gender,
-                phone,
-                date,
-                hobbies,
-                address,
-                subject,
-                file,
-                state,
             )
         )

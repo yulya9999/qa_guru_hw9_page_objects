@@ -8,12 +8,12 @@ class User:
     email: str
     gender: str
     phone: str
-    date_year: str
     date_month: str
     date_day: str
+    date_year: str
     subject: str
     hobby: str
-    photo: str
+    file: str
     address: str
     state: str
     city: str
