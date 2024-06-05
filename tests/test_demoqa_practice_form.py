@@ -20,7 +20,7 @@ def test_user_can_send_form():
             .fill_city('Karnal')
 
             .submit()
-            .should_registered_user_with(
+            .registered_user_with(
                 "Yulia Vdovina",
                 "yulya_vdovina@mail.ru",
                 "Female",
