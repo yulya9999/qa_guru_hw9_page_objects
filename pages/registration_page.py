@@ -1,5 +1,8 @@
-from selene import browser, be, have, command
+from selene import browser, have, command
 import os
+from pathlib import Path
+
+import tests
 from data.users import User
 
 
@@ -41,10 +44,6 @@ class RegistrationPage:
     def _fill_subject(self, value):
         browser.element("#subjectsInput").type(f"{value}")
         browser.element(".subjects-auto-complete__menu").click()
-        browser.element(
-            ".subjects-auto-complete__indicators .subjects-auto-complete__clear-indicator"
-        ).click()
-        browser.element("#subjectsInput").should(be.blank)
         browser.element("#subjectsInput").type(f"{value}").press_tab()
 
         return self
@@ -58,8 +57,8 @@ class RegistrationPage:
         return self
 
     def _upload_file(self, file_name):
-        browser.element(".form-file").click().element("#uploadPicture").send_keys(
-            os.path.abspath(f"data/{file_name}")
+        browser.element('#uploadPicture').type(
+            str(Path(tests.__file__).parent.joinpath(f'pictures/{file_name}'))
         )
         return self
 
