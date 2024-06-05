@@ -1,6 +1,5 @@
 from selene import browser, be, have, command
 import os
-import tests
 
 
 class RegistrationPage:
