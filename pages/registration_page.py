@@ -1,6 +1,5 @@
 from selene import browser, be, have, command
 import os
-import tests
 from data.users import User
 
 
