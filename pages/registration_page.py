@@ -12,6 +12,7 @@ class RegistrationPage:
     def open_browser(self):
 
         browser.open("/automation-practice-form")
+        return self
 
     def fill_first_name(self, value):
 
@@ -101,13 +102,13 @@ class RegistrationPage:
             have.exact_texts(
                 full_name,
                 email,
+                gender,
                 phone,
-                address,
                 date,
                 subject,
-                gender,
                 hobbies,
                 file,
+                address,
                 state,
             )
         )

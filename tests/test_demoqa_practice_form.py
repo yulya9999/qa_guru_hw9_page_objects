@@ -12,7 +12,7 @@ def test_user_can_send_form():
             .fill_number('0123456789')
             .fill_address('Penza, st. Ladoga 1234')
             .fill_date_of_birth('11', '028', '2000')
-            .fill_subjects('Economics')
+            .fill_subject('Economics')
             .fill_gender('2')
             .fill_hobbies('1')
             .upload_file('kit.jpg')
